@@ -1,20 +1,19 @@
+(defparameter *in* (open "c:/Users/joe/Documents/GitHub/pd2rs/clean_data.csv" :if-does-not-exist nil)
+	"Clean input filestream")
 (defun pinput ()
-	"Gets the next line from the parser, returns as a string"
-	(string "Team1 Team2 2003"))
-
-(defun db-newplayer (name)
-	"Writes a new player to the database, takes input of the name string.
-	Initializes ELO to 1000, sets ranking to -1 (i.e. uninitialized)"
-	())
+	"Gets the next line from the parser, returns as a string.
+	If no input return NIL"
+	(read-line *in*))
 (defun db-newgame (winner loser time)
-	"Writes a new game to the database, takes input of three strings")
-(defun in-list (testitem testlist)
-	"Returns true if testitem is in testlist, otherwise returns NIL
-	uses EQUAL as the comparison test"
-	(member testitem testlist :test #'EQUAL)
-)
+	"Writes a new game to the database, takes input of three strings"
+	(format t "Pushing data to the database!~%Winner: ~a~%Loser: ~a~%Time: ~a~%" winner loser time))
 
-
-(setf *player-list* NIL)
-(setf *game-list* NIL)
-
+(let ((x NIL))
+	(loop while (setf x (pinput)) doing
+		(let* ((firstcomma (position #\, x :test #'equal)) 
+			   (secondcomma (+ (+ 1 firstcomma) 
+			   	               (position #\, (subseq x (+ 1 firstcomma)) :test #'equal))))
+			(db-newgame (subseq x 0 firstcomma) 
+				        (subseq x (+ 1 firstcomma) secondcomma)
+				        (subseq x (+ 1 secondcomma) (+ (length x) -1))))))
+(close *in*)
