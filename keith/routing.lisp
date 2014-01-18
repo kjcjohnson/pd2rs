@@ -23,4 +23,10 @@
   (pd2rs-handlers:team-handler name))
 
 (hunchentoot:define-easy-handler (search-view :uri "/search") (query)
-  (pd2rs-handlers:seach-handler query))
+  (pd2rs-handlers:search-handler query))
+
+
+(push (hunchentoot:create-folder-dispatcher-and-handler 
+       "/public/" (merge-pathnames "public/" ++build-dir++))
+      hunchentoot:*dispatch-table*)
+

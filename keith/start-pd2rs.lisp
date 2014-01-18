@@ -2,19 +2,24 @@
 ;;;Written by Keith Jens Carl Johnson, January 2014
 ;;;
 
-(load "keith/package.lisp")
+(load (merge-pathnames "keith/package.lisp" (truename "/home/ubuntu/pd2rs/")))
 (in-package :pd2rs)
 
-(load "keith/qls.lisp")
-(load "keith/params.lisp")
-(load "keith/handlers.lisp")
-(load "keith/routing.lisp")
-(load "keith/db.lisp")
+(defparameter ++build-dir++ (truename "/home/ubuntu/pd2rs/"))
+
+(load (merge-pathnames "keith/qls.lisp"      ++build-dir++))
+(load (merge-pathnames "keith/params.lisp"   ++build-dir++))
+(load (merge-pathnames "keith/views.lisp"    ++build-dir++))
+(load (merge-pathnames "keith/db.lisp"       ++build-dir++))
+(load (merge-pathnames "keith/handlers.lisp" ++build-dir++))
+(load (merge-pathnames "keith/routing.lisp"  ++build-dir++))
+
 
 (defvar ++acceptor++ (make-instance 'hunchentoot:easy-acceptor :port 80))
 
 
-(defun data-conv (this) )
+(defun data-conv (this) 
+  (declare (ignore this)))
 
 
 (defun start () 

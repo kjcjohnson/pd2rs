@@ -15,3 +15,9 @@
 (defpackage #:pd2rs-db
   (:use #:cl))
 
+(defpackage #:pd2rs-views
+  (:use #:cl)
+  (:export #:render-header
+	   #:render-footer
+	   #:render-in-body))
+
