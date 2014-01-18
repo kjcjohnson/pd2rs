@@ -4,7 +4,8 @@
 (defpackage #:pd2rs
   (:use #:cl)
   (:export #:start
-	   #:stop))
+	   #:stop
+	   #:++build-dir++))
 
 (defpackage #:pd2rs-handlers
   (:use #:cl)
@@ -19,5 +20,6 @@
   (:use #:cl)
   (:export #:render-header
 	   #:render-footer
-	   #:render-in-body))
+	   #:render-in-body
+	   #:render-and-substitute))
 

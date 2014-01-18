@@ -87,7 +87,7 @@
 
   (setf (game-struct-processed? (find game-struct ++game-table++)) t))
 
-(defun insert-team ( &key team-name (tournament "") (elo 1000) (rank nil) (timestamp nil) )
+(defun insert-team ( &key team-name (tournament "") (elo 1000) (rank nil) (timestamp 0) )
 
   (if (null (find-team-by-name team-name)) (add-team team-name))
   (if (null (find-tournament-by-name tournament)) (add-tournament tournament))

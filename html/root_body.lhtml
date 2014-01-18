@@ -1,0 +1,42 @@
+<body>
+  <div class="wrapper">
+    
+    <div class="header container center"><h1>Professional DotA 2 Rankings</h1></div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar-inner">
+	<div class="container">
+	  <ul class="nav">
+	    <li><a class="navbar-brand active" href="/">PD2RS</a></li>
+	    <li><a href="#">Link 1</a></li>
+	    <li><a href="#">Link 2</a></li>
+	  </ul>
+	  <div class="pull-right">
+	    <form class="navbar-form" role="search" action="/search" method="post">
+	      <div class="form-group">
+		<input id="query" name="query" type="text" class="form-control navbar-right" placeholder="Search for a team:"/>
+		<button type="submit" class="btn btn-default form-control navbar-right">Submit</button>
+	      </div>
+	    </form>
+	  </div>
+	</div>
+      </div>
+    </div>    
+
+    <div class="content container">
+      <h3 class="list-group-basic">The Top Ten</h3>
+      <ol class="list-group">
+	<li class="list-group-item"><a href="/team?name=<:team-1>" ><:team-1></a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-2>" ><:team-2> </a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-3>" ><:team-3> </a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-4>" ><:team-4> </a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-5>" ><:team-5> </a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-6>" ><:team-6> </a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-7>" ><:team-7> </a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-8>" ><:team-8> </a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-9>" ><:team-9> </a></li>
+	<li class="list-group-item"><a href="/team?name=<:team-10>"><:team-10></a></li>
+      </ol>
+    </div>
+  </div>
+</body>
