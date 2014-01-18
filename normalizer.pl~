@@ -1,0 +1,450 @@
+open IN_FILE, '<clean_data.csv';
+open OUT_FILE, '>norm_data.csv';
+
+@lines = <IN_FILE>;
+
+$team1;
+$team2;
+$date;
+
+foreach(@lines){
+    if(/(.*),(.*),([0-9]+)/){
+	$team1 = $1;
+	$team2 = $2;
+	$date = $3;
+	if(&lengthen($team1)){
+	    $team1 = &lenghten($team1);
+	}
+	if(&lengthen($team2)){
+	    $team2 = &lenghten($team2);
+	}
+	print OUT_FILE ("$team1,$team2,$date");
+
+    }
+}
+
+sub lengthen{
+    $_ = $_[0];
+
+    if(/1st.VN/i){
+	"1stvn";
+    }else if(/3D!Clan/i){
+	"3dclan";
+    }else if(/3DMAX/i){
+	"3dmax";
+    }else if(/4FC/i){
+	"4 friends chrillee";
+    }else if(/???/i){
+	"???";
+    }else if(/ABC/i){
+	"abc";
+    }else if(/aL/i){
+	"absolute legends";
+    }else if(/Ace/i){
+	"aceonline";
+    }else if(/Adversa/i){
+	"adversa";
+    }else if(/AEON/i){
+	"aeonsports";
+    }else if(/Ahead.kz/i){
+	"ahead gaming";
+    }else if(/aL.Acad/i){
+	"al academy";
+    }else if(/aNa/i){
+	"anarchist";
+    }else if(/Aposis/i){
+	"aposis gaming";
+    }else if(/ART/i){
+	"art";
+    }else if(/Artyk/i){
+	"artyk";
+    }else if(/aSpera/i){
+	"aspera";
+    }else if(/Aurochs/i){
+	"aurochs";
+    }else if(/Ave/i){
+	"ave";
+    }else if(/Awake/i){
+	"awake";
+    }else if(/Baguette/i){
+	"baguette";
+    }else if(/BHA/i){
+	"bien hoa assassins";
+    }else if(/BX3/i){
+	"bx3 esports club";
+    }else if(/cSc/i){
+	"cascade";
+    }else if(/C.SK/i){
+	"chainsstack";
+    }else if(/Clan Pl/i){
+	"clan poland";
+    }else if(/CoMe/i){
+	"come";
+    }else if(/CNB/i){
+	"cnb";
+    }else if(/coL/i){
+	"complexity gaming";
+    }else if(/Wolves/i){
+	"copenhagen wolves";
+    }else if(/CLG/i){
+	"counter logic gaming";
+    }else if(/Darer/i){
+	"darer";
+    }else if(/DD/i){
+	"dddota";
+    }else if(/Denial/i){
+	"denial esports";
+    }else if(/Drmz/i){
+	"dreamz";
+    }else if(/DRz/i){
+	"druidz";
+    }else if(/DTS/i){
+	"dts gaming";
+    }else if(/DTS2010/i){
+	"dts2010";
+    }else if(/Duskbin/i){
+	"duskbin";
+    }else if(/DuSt/i){
+	"dust";
+    }else if(/Duza/i){
+	"duza";
+    }else if(/EC/i){
+	"eclypsia";
+    }else if(/EHOME/i){
+	"ehome";
+    }else if(/Energy/i){
+	"energy esports";
+    }else if(/E+4/i){
+	"eosin";
+    }else if(/EG/i){
+	"evil geniuses";
+    }else if(/evo^/i){
+	"evo";
+    }else if(/xP/i){
+	"experience";
+    }else if(/EYES/i){
+	"eyesonu";
+    }else if(/FastGG/i){
+	"fastgg";
+    }else if(/FD/i){
+	"firstdeparture";
+    }else if(/Flash/i){
+	"flash";
+    }else if(/[F.3]/i){
+	"flipside tactics";
+    }else if(/Fnatic/i){
+	"fnatic";
+    }else if(/Fnatic.EU/i){
+	"fnatic.eu";
+    }else if(/Fnatic.NA/i){
+	"fnatic.na";
+    }else if(/FL/i){
+	"forlove";
+    }else if(/fOu/i){
+	"for our utopia";
+    }else if(/fota/i){
+	"freedom of the action";
+    }else if(/FUBAR/i){
+	"fubar";
+    }else if(/FXO/i){
+	"fxopen e-sports";
+    }else if(/PLS/i){
+	"gabe pls";
+    }else if(/GU/i){
+	"gamer university";
+    }else if(/GL/i){
+	"gamersleague";
+    }else if(/GW/i){
+	"gameware";
+    }else if(/[GD]/i){
+	"gdteam";
+    }else if(/GizMo/i){
+	"gizmo";
+    }else if(/GG/i){
+	"gosugamers";
+    }else if(/GraTs/i){
+	"grats tho";
+    }else if(/H2k/i){
+	"h2k gaming";
+    }else if(/HGT/i){
+	"heart get together";
+    }else if(/HWA/i){
+	"hwa";
+    }else if(/iCCup/i){
+	"iccup";
+    }else if(/Ice/i){
+	"ice";
+    }else if(/IC/i){
+	"ice climbers";
+    }else if(/iDeal/i){
+	"ideal";
+    }else if(/imG/i){
+	"imaginary gaming";
+    }else if(/IMP/i){
+	"imperium";
+    }else if(/Imp/i){
+	"impervious";
+    }else if(/iNG/i){
+	"infernity gaming";
+    }else if(/Inf/i){
+	"infinity";
+    }else if(/Insight/i){
+	"insight esports";
+    }else if(/Invasion/i){
+	"invasion";
+    }else if(/iG/i){
+	"invictus gaming";
+    }else if(/Isurus/i){
+	"isurus";
+    }else if(/It's Gosu/i){
+	"it's gosu esports";
+    }else if(/JoeNet/i){
+	"joenet";
+    }else if(/KP/i){
+	"kaipi";
+    }else if(/Kawaii/i){
+	"kawaii";
+    }else if(/Keita/i){
+	"keita gaming";
+    }else if(/LGD/i){
+	"lgd gaming";
+    }else if(/LGD.int/i){
+	"lgd international";
+    }else if(/eL'Pride/i){
+	"lions pride";
+    }else if(/LLL/i){
+	"lowlandlions";
+    }else if(/MD/i){
+	"make dream";
+    }else if(/MYM/i){
+	"meet your makers";
+    }else if(/Mineski/i){
+	"mineski infinity";
+    }else if(/Minion/i){
+	"minion!";
+    }else if(/MiTH/i){
+	"mith.trust";
+    }else if(/mMe/i){
+	"mme";
+    }else if(/MU/i){
+	"moonlight united";
+    }else if(/mTw/i){
+	"mortal team work";
+    }else if(/M5/i){
+	"moscow five";
+    }else if(/mouz/i){
+	"mousesports";
+    }else if(/MSI/i){
+	"msi-evogt";
+    }else if(/MUFC/i){
+	"mufc";
+    }else if(/MVP/i){
+	"mvp";
+    }else if(/N9/i){
+	"natural 9";
+    }else if(/Na`Vi/i){
+	"natus vincere";
+    }else if(/NeoES/i){
+	"neolution";
+    }else if(/Neo.ac/i){
+	"neolution.ac";
+    }else if(/Neo.int/i){
+	"neolution.int";
+    }else if(/Neo.ino/i){
+	"neolution.ino";
+    }else if(/Neo.th/i){
+	"neolution.th";
+    }else if(/NTL/i){
+	"netolic";
+    }else if(/NeVo/i){
+	"nevo";
+    }else if(/neX-I/i){
+	"nex impetus";
+    }else if(/NEXT/i){
+	"next.kz";
+    }else if(/Nirvana/i){
+	"nirvana";
+    }else if(/Nirvana.int/i){
+	"nirvana.int";
+    }else if(/NJ&K/i){
+	"njkids";
+    }else if(/nth/i){
+	"no tidehunter";
+    }else if(/OK/i){
+	"online kingdom";
+    }else if(/OoT/i){
+	"oot";
+    }else if(/Orange/i){
+	"orange";
+    }else if(/OsG/i){
+	"oslik gaming";
+    }else if(/Pacific/i){
+	"pacific";
+    }else if(/Pacific 2/i){
+	"pacific2";
+    }else if(/paiN/i){
+	"pain";
+    }else if(/paiN.int/i){
+	"painint";
+    }else if(/PanDa/i){
+	"pandarea";
+    }else if(/PSN/i){
+	"poseidon";
+    }else if(/PotM/i){
+	"potm bottom";
+    }else if(/PR/i){
+	"power rangers";
+    }else if(/prOp/i){
+	"property";
+    }else if(/Pulse/i){
+	"pulse";
+    }else if(/QPAD/i){
+	"qpad dragons";
+    }else if(/Quantic/i){
+	"quantic gaming";
+    }else if(/QWERT/i){
+	"qwert12345";
+    }else if(/rat/i){
+	"rat in the dark";
+    }else if(/RSnake/i){
+	"rattlesnake";
+    }else if(/RS.int/i){
+	"rattlesnake.int";
+    }else if(/Rvg/i){
+	"revenge";
+    }else if(/r3D/i){
+	"rigg3d";
+    }else if(/RStars/i){
+	"risingstars";
+    }else if(/ROOT/i){
+	"root gaming";
+    }else if(/RoX/i){
+	"rox";
+    }else if(/SFZ/i){
+	"scaryfacez";
+    }else if(/Scythe/i){
+	"scythe gaming";
+    }else if(/SOne/i){
+	"seasonone";
+    }else if(/sqL/i){
+	"sequential";
+    }else if(/Shakira/i){
+	"shakira";
+    }else if(/S.int/i){
+	"sigma.int";
+    }else if(/SK/i){
+	"sk gaming";
+    }else if(/Skåne/i){
+	"skanes elit";
+    }else if(/SH/i){
+	"skyhigh";
+    }else if(/Speed/i){
+	"speed gaming";
+    }else if(/ST/i){
+	"startale";
+    }else if(/SGC/i){
+	"storm games clan";
+    }else if(/SnY/i){
+	"sushiandyasha";
+    }else if(/Shz/i){
+	"svenhunterz";
+    }else if(/SnC/i){
+	"sweetnchina";
+    }else if(/SWYC/i){
+	"swyc";
+    }else if(/Sym4ny/i){
+	"symphony";
+    }else if(/TBA/i){
+	"tba";
+    }else if(/TBD/i){
+	"tbd";
+    }else if(/TCM/i){
+	"tcm-gaming";
+    }else if(/aAa/i){
+	"team aaa";
+    }else if(/Dignitas/i){
+	"team dignitas";
+    }else if(/DK/i){
+	"team dk";
+    }else if(/Empire/i){
+	"team empire";
+    }else if(/Infused/i){
+	"team infused";
+    }else if(/Life/i){
+	"team life";
+    }else if(/Liquid/i){
+	"team liquid";
+    }else if(/Menace/i){
+	"team menace.fi";
+    }else if(/ONE/i){
+	"team one";
+    }else if(/Zenith/i){
+	"team zenith";
+    }else if(/Tera/i){
+	"tera gaming";
+    }else if(/TTD/i){
+	"terrible terrible damage";
+    }else if(/[A]/i){
+	"the alliance";
+    }else if(/TR/i){
+	"the retry";
+    }else if(/Titan/i){
+	"titan esports";
+    }else if(/TnC/i){
+	"tnc";
+    }else if(/TongFu/i){
+	"tongfu";
+    }else if(/top/i){
+	"top igrokai";
+    }else if(/TTB/i){
+	"ttb";
+    }else if(/Turtle/i){
+	"turtle masters";
+    }else if(/TyLoo/i){
+	"tyloo";
+    }else if(/uebelstG/i){
+	"uebelst";
+    }else if(/ULTI/i){
+	"ultimate";
+    }else if(/UR/i){
+	"underrateds";
+    }else if(/VG/i){
+	"vici gaming";
+    }else if(/VTG/i){
+	"virtualthrone";
+    }else if(/VP/i){
+	"virtus.pro";
+    }else if(/Virus/i){
+	"virus gaming";
+    }else if(/Vivacity/i){
+	"vivacity";
+    }else if(/vTG/i){
+	"vt gaming";
+    }else if(/w4sp/i){
+	"w4sp";
+    }else if(/WhA/i){
+	"we haz asian";
+    }else if(/WW/i){
+	"western wolves";
+    }else if(/WHB/i){
+	"wild honey badgers";
+    }else if(/WE/i){
+	"world elite";
+    }else if(/WPC.A/i){
+	"wpc";
+    }else if(/XX5/i){
+	"xx5";
+    }else if(/yB/i){
+	"youboat";
+    }else if(/Z4/i){
+	"z4";
+    }else if(/Zero/i){
+	"zero";
+    }else if(/zNation/i){
+	"znation";
+    }else if(/zRAGE/i){
+	"zrage";
+    }else{
+	0;
+    }
+}
