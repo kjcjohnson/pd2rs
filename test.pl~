@@ -1,0 +1,5 @@
+$_ = "|R1D1team=rox |R1D1score=1 |R1D1win=1";
+
+if(/\|R[0-9]+D[0-9]+team=(.*)\s \|R[0-9]+D[0-9]+score=([0-9])/){
+    print ("yep \n");
+}
