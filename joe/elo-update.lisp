@@ -1,26 +1,26 @@
-;Assuming definition of team sturct (team id teamid elo rank timestamp)
-; and                   game sturct (game id winningid losingid timestamp processed)
+(defstruct team id teamid elo rank timestamp)
+; and                   game struct (game id winningid losingid timestamp processed)
 
 ;comment this out before use with database
-; (defun db-newteam (teamid elo rank timestamp)
-; 	"Writes a new team to the database"
-; 	())
-; (defun get-uninitialized-list ()
-; 	"Returns a list of game sturcts with the same timestamp"
-; 	())
-; (defun get-team-list ()
-; 	"Returns a list of the most recent team struts, it also sorts by ranking
-; 	from best to worst"
-; 	())
-; (defun update-team-elo (team elo timestamp)
-; 	"returns an updated team struct with the elo and timestamp changed"
-; 	())
-; (defun make-ranking (teamlist)
-; 	"Takes in a list of players and assigns rankings in order"
-; 	())
-; (defun update-ranking (teamlist)
-; 	""
-; 	())
+(defun db-newteam (teamid elo rank timestamp)
+	"Writes a new team to the database"
+	())
+(defun get-unprocessed-list ()
+	"Returns a list of game sturcts with the same next timestamp"
+	())
+(defun get-team-list ()
+	"Returns a list of the most recent team struts, it also sorts by ranking
+	from best to worst"
+	())
+(defun update-team-elo (team elo timestamp)
+	"returns an updated team struct with the elo and timestamp changed"
+	())
+(defun make-ranking (teamlist)
+	"Takes in a list of players and assigns rankings in order"
+	())
+(defun update-ranking (teamlist)
+	""
+	())
 (defun expected-win (elo1 elo2)
 	"Returns the expected win share for a player with elo1 if her oppoent's elo is elo2"
 	(/ 1 (+ 1 (expt 10 (/ (- elo2 elo1) 400)))))
