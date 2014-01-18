@@ -1,0 +1,9 @@
+open FILE, '<LP_data.xml';
+
+@lines = <FILE>;
+
+foreach(@lines){
+    if(/<page>/){
+	print "It matched!\n";
+    }
+}

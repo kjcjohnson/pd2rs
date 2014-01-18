@@ -34,7 +34,10 @@
            #:ecl
            #:gcl
            #:lispworks
+<<<<<<< HEAD
 	   #:mkcl
+=======
+>>>>>>> 62351ba314bbcf759b2f6520a52794c5d2641dee
            #:scl
            #:sbcl))
 
@@ -66,7 +69,12 @@
 
 (defpackage #:qlqs-minitar
   (:use #:cl)
+<<<<<<< HEAD
   (:export #:unpack-tarball))
+=======
+  (:export #:tarball-contents
+           #:unpack-tarball))
+>>>>>>> 62351ba314bbcf759b2f6520a52794c5d2641dee
 
 (defpackage #:quicklisp-quickstart
   (:use #:cl #:qlqs-impl #:qlqs-impl-util #:qlqs-http #:qlqs-minitar)
@@ -304,6 +312,7 @@
                   #:socket-connect
                   #:socket-make-stream))
 
+<<<<<<< HEAD
 ;;; MKCL
 
 (define-implementation-package :mkcl #:qlqs-mkcl
@@ -320,6 +329,8 @@
                   #:socket-connect
                   #:socket-make-stream))
 
+=======
+>>>>>>> 62351ba314bbcf759b2f6520a52794c5d2641dee
 ;;;
 ;;; Utility function
 ;;;
@@ -357,8 +368,11 @@
 (definterface host-address (host)
   (:implementation t
     host)
+<<<<<<< HEAD
   (:implementation mkcl
     (qlqs-mkcl:host-ent-address (qlqs-mkcl:get-host-by-name host)))
+=======
+>>>>>>> 62351ba314bbcf759b2f6520a52794c5d2641dee
   (:implementation sbcl
     (qlqs-sbcl:host-ent-address (qlqs-sbcl:get-host-by-name host))))
 
@@ -406,6 +420,7 @@
   (:implementation lispworks
     (qlqs-lispworks:open-tcp-stream host port
                                    :direction :io
+<<<<<<< HEAD
                                    :errorp t
                                    :read-timeout nil
                                    :element-type '(unsigned-byte 8)
@@ -422,6 +437,11 @@
                                    :input t
                                    :output t
                                    :buffering :full)))
+=======
+                                   :read-timeout nil
+                                   :element-type '(unsigned-byte 8)
+                                   :timeout 5))
+>>>>>>> 62351ba314bbcf759b2f6520a52794c5d2641dee
   (:implementation sbcl
     (let* ((endpoint (qlqs-sbcl:host-ent-address
                       (qlqs-sbcl:get-host-by-name host)))
@@ -968,7 +988,11 @@
                                   (format nil ":~D" port)))
       (add-line "Connection: close")
       ;; FIXME: get this version string from somewhere else.
+<<<<<<< HEAD
       (add-line "User-Agent: quicklisp-bootstrap/2013121600")
+=======
+      (add-line "User-Agent: quicklisp-bootstrap/2011103100")
+>>>>>>> 62351ba314bbcf759b2f6520a52794c5d2641dee
       (add-newline sink)
       (sink-buffer sink))))
 
@@ -1584,6 +1608,7 @@ the indexes in the header accordingly."
 
 (defun install (&key ((:path *home*) *home*)
                 ((:proxy *proxy-url*) *proxy-url*))
+<<<<<<< HEAD
   (when (pathname-name *home*)
     (let ((name (pathname-name *home*)))
       (warn "Making ~A part of the install pathname directory"
@@ -1597,6 +1622,9 @@ the indexes in the header accordingly."
                                            (list :relative))
                                        (list name))))))
   (setf *home* (merge-pathnames *home* (truename *default-pathname-defaults*)))
+=======
+  (setf *home* (merge-pathnames *home*))
+>>>>>>> 62351ba314bbcf759b2f6520a52794c5d2641dee
   (let ((setup-file (qmerge "setup.lisp")))
     (when (probe-file setup-file)
       (multiple-value-bind (result proceed)
@@ -1613,6 +1641,14 @@ the indexes in the header accordingly."
         t)
       (call-with-quiet-compilation #'initial-install)))
 
+<<<<<<< HEAD
+=======
+;;; Try to canonicalize to an absolute pathname; helps on Lisps where
+;;; *default-pathname-defaults* isn't an absolute pathname at startup
+;;; (e.g. CCL, CMUCL)
+(setf *default-pathname-defaults* (truename *default-pathname-defaults*))
+
+>>>>>>> 62351ba314bbcf759b2f6520a52794c5d2641dee
 (write-string *after-load-message*)
 
 ;;; End of quicklisp.lisp
