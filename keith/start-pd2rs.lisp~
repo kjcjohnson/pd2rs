@@ -1,0 +1,22 @@
+;;;start-pd2rs.lisp -- a file that manages starting the server, initing everything
+;;;Written by Keith Jens Carl Johnson, January 2014
+;;;
+
+(load "package.lisp")
+(in-package :pd2rs)
+
+(load "qls.lisp")
+(load "params.lisp")
+
+(defvar ++acceptor++ (make-instance 'hunchentoot:easy-acceptor :port 80))
+
+(hunchentoot:define-easy-handler (post-new-data :uri "/post/data") 
+    ((data :request-type :post) (auth :request-type :post))
+
+  (if (null (string= auth ++auth-token++))
+      (progn
+        (setf (hunchentoot:return-code* hunchentoot:+http-forbidden+))
+	(hunchentoot:send-headers))
+      (progn
+	(bordeaux-threads:make-thread #'data-conv)
+	(format nil "Post processing"))))

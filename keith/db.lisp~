@@ -1,0 +1,6 @@
+;;;db.lisp -- implements a simple database
+;;;Written by Keith Jens Carl Johnson, January 2014
+;;;
+
+(defparameter ++id-name-table++ nil)
+(defparameter ++id-tournament-table++ nil)
