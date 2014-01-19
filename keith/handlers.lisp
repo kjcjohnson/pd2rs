@@ -25,7 +25,7 @@
 				       :team-10 "The Last team")))
 
 
-(defun team-index-handler ()
+(defun team-index-handler ( )
 
   (pd2rs-views:render-in-body sstr
     (pd2rs-views:render-and-substitute sstr

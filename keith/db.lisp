@@ -1,4 +1,4 @@
-;;;db.lisp -- implements a simple database
+;;;db.lisp -- implements a simple memory database
 ;;;Written by Keith Jens Carl Johnson, January 2014
 ;;;
 
