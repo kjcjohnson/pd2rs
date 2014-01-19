@@ -143,7 +143,7 @@ foreach(@lines){
 	    }
 	}else{
 	    #print LOG_OUT ("team 2 = $3, $4 \n");
-	    $tdstring = 1000*$def_date + $time;
+	    $tdstring = 10000*$def_date + $time;
 	    $team2 = $3;
 	    $team2score = $4;
 	    #print LOG_OUT ("date = $tdstring\n");

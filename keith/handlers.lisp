@@ -7,22 +7,39 @@
 
 (defun root-handler ()
 
-  (pd2rs-views:render-in-body sstr
-    (pd2rs-views:render-and-substitute sstr 
-				       (merge-pathnames "html/root_body.lhtml"
-							pd2rs:++build-dir++)
-				       :navbar  (pd2rs-views:render-navbar-to-string)
-						
-				       :team-1  "The First team"
-				       :team-2  "The Second team"
-				       :team-3  "The Bitch team"
-				       :team-4  "Yo Mama's team"
-				       :team-5  "The Ass-hat team"
-				       :team-6  "The Underdog team"
-				       :team-7  "The Miserable team"
-				       :team-8  "The Sucky team"
-				       :team-9  "The Ninth team"
-				       :team-10 "The Last team")))
+  (let ((latest-ts (remove-if-not #'(lambda (s) 
+				      (= (parse-number (pd2rs-db::team-struct-timestamp s))
+					 pd2rs-db::++max-timestamp++)) pd2rs-db:++team-table++)))
+    (let ((sted (sort latest-ts #'(lambda (a b) (> (pd2rs-db::team-struct-rank a)
+						   (pd2rs-db::team-struct-rank b))))))
+      
+
+      (pd2rs-views:render-in-body sstr
+				  (pd2rs-views:render-and-substitute sstr 
+								     (merge-pathnames "html/root_body.lhtml"
+										      pd2rs:++build-dir++)
+								     :navbar  (pd2rs-views:render-navbar-to-string)
+								     
+				     :team-1 
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 0 sted))) 
+				     :team-2
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 1 sted)))  
+				     :team-3  
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 2 sted)))
+				     :team-4  
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 3 sted)))
+				     :team-5  
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 4 sted)))
+				     :team-6  
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 5 sted)))
+				     :team-7
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 6 sted)))
+				     :team-8  
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 7 sted)))
+				     :team-9  
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 8 sted)))
+				     :team-10 
+				     (pd2rs-db::find-team-by-id (pd2rs-db::team-struct-team-id (nth 9 sted))))))))
 
 
 (defun team-index-handler ( )

@@ -15,7 +15,7 @@
 (defparameter ++next-game-id++ 0)
 (defparameter ++team-table++ nil)
 (defparameter ++next-table-id++ 0)
-
+(defparameter ++max-timestamp++ 0)
 
 (defstruct game-struct
   id
@@ -98,6 +98,9 @@
 
   ;(if (null (find-team-by-name team-name)) (add-team team-name))
   (if (null (find-tournament-by-name tournament)) (add-tournament tournament))
+
+  (if (< ++max-timestamp++ (parse-integer timestamp)) 
+      (setf ++max-timestamp++ (parse-integer timestamp)))
 
   (push
    (make-team-struct :id            ++next-table-id++

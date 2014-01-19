@@ -9,7 +9,7 @@
     }
     };
 
-    var data = {label: "Elo", data:  [[20130812, 1000], [20130414, 1200], [20130613, 900], [20130224, 1100]]};
+    var data = {data: <:important-data>};
 
     $(document).ready(function() {
     $.plot($("#plot"), [data]);
@@ -28,7 +28,7 @@
 		<tr><td>Current Rating</td></tr>
 		<tr><td><strong><:curr-rating></strong></td></tr>
 		<tr><td>Peak Rating</td></tr>
-		<tr><td><strong><:peak_rating></strong></td></tr>
+		<tr><td><strong><:peak-rating></strong></td></tr>
 	       </table>
 	       <br><br><br>
 	       <a href="/history?name=<:team-name>">Full History</a>

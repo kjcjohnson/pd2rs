@@ -1,0 +1,15 @@
+<body>
+  <div class="wrapper">
+    <div class="header container center"><h1><:teamname> Match History</h1></div>
+    <:navbar>
+
+      <div class="content container">
+
+	<h3>These are all the matches that we have recorded for <:teamname>, but unfortunately our database is not yet complete</h3>
+	<div class="well">
+	  <tr>
+	    <th>date</th>
+	</div>
+      </div>
+  </div>
+</body>

@@ -142,4 +142,4 @@
 					;write new teams to database
 	 (db-newteam teams))))
   
-(bordeaux-threads:make-thread #'calc-elos)
+(bordeaux-threads:make-thread #'calc-elos :name "ELO THREAD" )
