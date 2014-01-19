@@ -20,6 +20,14 @@
   "Copies the standard footer to the string stream."
   (copy-file-to-stream sstr (merge-pathnames "html/footer.html" pd2rs::++build-dir++)))
 
+(defun render-navbar ( sstr )
+  (pd2rs-views:render-and-substitute sstr
+				     (merge-pathnames "html/navbar_.lhtml"
+						      pd2rs:++build-dir++)))
+(defmacro render-navbar-to-string ()
+  (with-output-to-string (s)
+     (render-navbar s)))
+
 (defmacro render-in-body ( sstr-symb &body body )
   "Wraps a page in header and footer."
   `(with-output-to-string (,sstr-symb)

@@ -1,0 +1,11 @@
+<body>
+
+  <div class="wrapper">
+    <div class="header container center"><h1>Alphabetical Index of Teams</h1></div>
+
+    <:navbar>
+
+    <:team-data>
+
+  </div>
+</body>

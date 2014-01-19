@@ -1,0 +1,27 @@
+<body>
+  <div class="wrapper">
+    
+    <div class="header container center"><h1>About The Site</h1></div>
+
+    <:navbar>
+      <div class="container">
+	 <h3>Who Are We?</h3>
+	 <p>We're 3 student's at the University of Michigan who are all studying computing and engineering (among other things).</p>
+	 <p>We can be collectively contacted at <a href="mailto:packrat386@gmail.com">packrat386@gmail.com</a>.
+	 
+	 <h3>What Is This Site For?</h3>
+	 <p>We built this site for MHacks III in Detroit, and it was entirely created during the 36 hour hacking period. We sought out to make a ranking for professional Dota 2, with inspiration from sites like <a href="http://aligulac.com">aligulac</a> and the  <a href="http://www.teamliquid.net/tlpd/">Team Liquid Progaming Database</a>. While its functionality is certainly not perfect, we wanted to experiment with how one could structure a site like this. We also see this as an opportunity to learn new skills and platforms for development.</p>
+	 
+	 <h3>How Did We Build It?</h3>
+	 <p>We built our ranking using date from the <a href="http://wiki.teamliquid.net/dota2/Main_Page">Liquipedia Dota 2 Wiki</a>. We parsed the game data using Perl, and then uploaded it to a Lisp server using Amazon Web Services. Our Lisp enviroment calculates the Elo ranking and mantains a database on the cloud. We then have a Lisp back-end that serves the requests to this page by populating templates with data from that database. Our front-end is static HTML/CSS with a bit of help from Bootstrap.</p>
+	 <p>tldr: mostly Lisp</p>
+	 
+	 <h3>License</h3>
+	 <p>All of our code is Open Source under the <a href="http://opensource.org/licenses/MIT">MIT License</a> and can be found on our <a href="https://github.com/kjcjohnson/pd2rs">GitHub Repo</a>.</p>
+	 
+	 <h3>Thanks</h3>
+	 <p>To the staff of Liquipedia for their assistance, the staff of MHacks for creating the event, and the Michigan Hackers for fostering a creative community at U of M</p>
+	 
+      </div>
+  </div>
+</body>

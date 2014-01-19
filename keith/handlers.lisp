@@ -11,6 +11,8 @@
     (pd2rs-views:render-and-substitute sstr 
 				       (merge-pathnames "html/root_body.lhtml"
 							pd2rs:++build-dir++)
+				       :navbar  (pd2rs-views:render-navbar-to-string)
+						
 				       :team-1  "The First team"
 				       :team-2  "The Second team"
 				       :team-3  "The Bitch team"
@@ -23,15 +25,41 @@
 				       :team-10 "The Last team")))
 
 
+(defun team-index-handler ()
+
+  (pd2rs-views:render-in-body sstr
+    (pd2rs-views:render-and-substitute sstr
+				       (merge-pathnames "html/team_index.lhtml"
+							pd2rs:++build-dir++)
+				       :navbar   (pd2rs-views:render-navbar-to-string))))
+
 (defun team-handler (name)
   
   (pd2rs-views:render-in-body sstr
-    (format sstr "<h1>This is the page for team ~a</h1>"
-	    name)))
+    (pd2rs-views:render-and-substitute sstr
+			      (merge-pathnames "html/team.lhtml"
+					       pd2rs:++build-dir++)
+			      :navbar    (pd2rs-views:render-navbar-to-string)
+			      :team-name name)))
 
 
 (defun search-handler (query)
 
   (pd2rs-views:render-in-body sstr
-    (format sstr "<h1>You searched for: ~a</h1>"
-	    query)))
+    (pd2rs-views:render-and-substitute sstr
+			      (merge-pathnames "html/search.lhtml"
+					       pd2rs:++build-dir++)
+			      :navbar  (pd2rs-views:render-navbar-to-string)
+			      :query   query)))
+
+
+(defun about-handler ()
+
+  (pd2rs-views:render-in-body sstr
+    (pd2rs-views:render-and-substitute sstr
+				       (merge-pathnames "html/about.lhtml"
+							pd2rs:++build-dir++)
+				       :navbar  (pd2rs-views:render-navbar-to-string))))
+						  
+						  
+							

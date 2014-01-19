@@ -11,7 +11,9 @@
   (:use #:cl)
   (:export #:root-handler
 	   #:team-handler
-	   #:search-handler))
+	   #:search-handler
+	   #:about-handler
+	   #:team-index-handler))
 
 (defpackage #:pd2rs-db
   (:use #:cl))
@@ -21,5 +23,7 @@
   (:export #:render-header
 	   #:render-footer
 	   #:render-in-body
-	   #:render-and-substitute))
+	   #:render-and-substitute
+	   #:render-navbar
+	   #:render-navbar-to-string))
 

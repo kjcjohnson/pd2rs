@@ -25,6 +25,11 @@
 (hunchentoot:define-easy-handler (search-view :uri "/search") (query)
   (pd2rs-handlers:search-handler query))
 
+(hunchentoot:define-easy-handler (about-view :uri "/about") ()
+  (pd2rs-handlers:about-handler))
+
+(hunchentoot:define-easy-handler (team-index-view :uri "/teamindex") ()
+  (pd2rs-handlers:team-index-handler))
 
 (push (hunchentoot:create-folder-dispatcher-and-handler 
        "/public/" (merge-pathnames "public/" ++build-dir++))
