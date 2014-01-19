@@ -2,25 +2,26 @@
   
   <div class="wrapper">
     <div class="header container center"><h1><:team-name></h1></div>
-
+  
     <:navbar>
-      <div class="container">
+      <div id="mainContainer" class="container">
 	<div class="container-fluid">
 	  <div class="row-fluid">
-	    <div class="span2">
-	      <div class="panel panel-primary">
-		<div class="panel-heading"><h3><:teamname></h3></div>
-		<div class="panel-body">
-		  <ul>
-		    <li>Current Rating: <:curr-rating></li>
-		    <li>Peak Rating: <:peak_rating> (<:peak-date>)</li>
-		    <li><a href="/history?name=<:team-name>">Full History</a></li>
-		  </ul>
-		</div>
-	      </div>
+	    <div class="span3 sidebar">
+	      <h3>Overview</h3>
+	       <table align="center">
+		<tr><td>Current Rating</td></tr>
+		<tr><td><strong><:curr-rating></strong></td></tr>
+		<tr><td>Peak Rating</td></tr>
+		<tr><td><strong><:peak_rating></strong></td></tr>
+	       </table>
+	       <br><br><br>
+	       <a href="/history?name=<:team-name>">Full History</a>
 	    </div>
-	    <div class = "span10">
-	      <!--Graph Goes Here-->
+	    <div class="span9 graph">
+	      <h3>Historical Performance</h3>
+	      <div id="graphdata" visible="false"><:elo-history></div>
+	      <div id="graph"></div>
 	    </div>
 	  </div>
 	</div>
