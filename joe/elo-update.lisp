@@ -68,25 +68,28 @@
 
 (defun gameinmatches (testgame matchlist)
   "Does the matchlist have the testgame in it?"
+  (format t "gameinmatching with |matchlist|=~a~%" (length matchlist))
   (loop for m in matchlist do (if (or (and (equal (game-winningid testgame) (match-winningid m)) 
 					   (equal (game-losingid testgame) (match-losingid m)))
 				      (and (equal (game-winningid testgame) (match-losingid m)) 
 					   (equal (game-losingid testgame) (match-winningid m))))
 				  (return m)) finally (return NIL)))
-(defun makematches (games &aux matches)
+(defun makematches (games)
   "Takes in a list of game structs and outputs a list of matches"
+  ;(setf matches NIL)
   '(defparameter *matches* NIL "List of matches")
-  (format t "Starting matchmaking... ~%")
-  (loop for g in games do (let ((x (gameinmatches g matches)))
-			    (if x
-				(if (equalp (game-winningid g) (match-winningid x))
-				    (setf (match-wins x) (+ 1 (match-wins x)))
-				    (setf (match-losses x) (+ 1 (match-losses x))))
-				(setf matches (append matches (list (make-match :winningid (game-winningid g)
-										:losingid (game-losingid g)
-										:wins 1
-										:losses 0))))))
-     finally (return matches)))
+  (let ((matches nil))
+    (format t "Starting matchmaking... ~%")
+    (loop for g in games do (let ((x (gameinmatches g matches)))
+			      (if x
+				  (if (equalp (game-winningid g) (match-winningid x))
+				      (setf (match-wins x) (+ 1 (match-wins x)))
+				      (setf (match-losses x) (+ 1 (match-losses x))))
+				  (setf matches (append matches (list (make-match :winningid (game-winningid g)
+										  :losingid (game-losingid g)
+										  :wins 1
+										  :losses 0))))))
+       finally (return matches))))
 (defun match-id (id testteam)
   "If testteam has team id id, return T, else return NIL"
   (if (equal id (team-teamid testteam)) t nil))

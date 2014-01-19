@@ -1,5 +1,5 @@
 (defparameter *in* 
-  (open (merge-pathnames "perl/clean_data.csv" pd2rs:++build-dir++)
+  (open (merge-pathnames "perl/sub_data.csv" pd2rs:++build-dir++)
 	:if-does-not-exist nil)
 	"Clean input filestream")
 
@@ -30,6 +30,6 @@
 			   	               (position #\, (subseq x (+ 1 firstcomma)) :test #'equal))))
 			(db-newgame (subseq x 0 firstcomma) 
 				        (subseq x (+ 1 firstcomma) secondcomma)
-				        (subseq x (+ 1 secondcomma) (+ (length x) -1))))))
+				        (subseq x (+ 1 secondcomma) (length x))))))
 (close *in*)
 '(close *out*)
