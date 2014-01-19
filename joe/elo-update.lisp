@@ -1,61 +1,93 @@
 (defstruct team teamid elo rank timestamp)
 (defstruct game winningid losingid timestamp)
-(defstruct round winningid losingid wins losses)
-
+(defstruct match winningid losingid wins losses)
+(defparameter *k-factor* 32
+	"k-factor for the elo algorithm")
+(defparameter *init-elo* 1000
+	"default value for an initial team")
 ;comment this out before use with database
-(defun db-newteam (teamid elo rank timestamp)
+(defun db-newteam (outteams)
 	"Writes a new team to the database"
 	())
-(defun get-unprocessed-list ()
+(defun get-games ()
 	"Returns a list of game sturcts with the same next timestamp"
 	())
-(defun get-team-list ()
+(defun get-teams ()
 	"Returns a list of the most recent team struts, it also sorts by ranking
 	from best to worst"
 	())
-(defun update-team (oldteam newtimestamp)
-	"returns an updated team struct with the timestamp changed"
-	(make-team :teamid (team-teamid oldteam) :elo (team-elo oldteam) :rank 0 :timestamp newtimestamp))
-(defun update-team-elo (oldteam newelo newtimestamp)
-	"returns an updated team struct with the elo and timestamp changed"
-	(make-team :teamid (team-teamid oldteam) :elo newelo :rank 0 :timestamp newtimestamp))
-(defun gameinrounds (testgame roundlist)
-	"Does the roundlist have the testgame in it?"
-	(loop for r in roundlist do (if (or (and (equal (game-winningid testgame) (round-winnigid r)) 
-											 (equal (game-losingid testgame) (round-losingid r)))
-									    (and (equal (game-winningid testgame) (round-losingid r)) 
-											 (equal (game-losingid testgame) (round-winningid r))))
-									(retrun r)) finally (return NIL)))
-(defun makerounds (games)
-	"Takes in a list of game structs and outputs a list of rounds"
-	(defvar *rounds* NIL "List of rounds")
-	(loop for g in games do (if (gameinrounds g *rounds*)
-								(if ()
-									()
-									())
-								())))
-(defun makeranking (teamlist)
-	"Takes in a list of players and assigns rankings in order"
-	())
-(defun update-ranking (teamlist)
-	""
-	())
+
 (defun expected-win (elo1 elo2)
 	"Returns the expected win share for a player with elo1 if her oppoent's elo is elo2"
 	(/ 1 (+ 1 (expt 10 (/ (- elo2 elo1) 400)))))
-(defparameter *k-factor* 32
-	"k-factor for the elo algorithm")
-(defun elo (winnum losenum wins losses)1
+(defun elo (winnum losenum wins losses)
 	"Is given the winning and losing elos and returns a two element list
 	consisting of the new elos"
 	(list (+ winnum (* *k-factor* (- wins (* (+ wins losses) (expected-win winnum losenum))))) 
 	  (+ losenum (* *k-factor* (- losses (* (+ wins losses) (expected-win losenum winnum)))))))
-; (defun in-list (testitem testlist)
-; 	"Returns true if testitem is in testlist, otherwise returns NIL
-; 	uses EQUAL as the comparison test"
-; 	(member testitem testlist :test #'EQUAL)
-; )
-(format t "win-p: ~a~%" (expected-win 1500 1200))
-(format t "win-p: ~a~%" (expected-win 1200 1500))
-(format t "T1: ~a T2: ~a~%" (car (elo 1500 1200 7 6)) (cadr (elo 1500 1200 7 6 )))
-(format t "T1: ~a T2: ~a~%" (car (elo 1500 1200 1 22)) (cadr (elo 1500 1200 1 22)))
+
+(defun gameinmatches (testgame matchlist)
+	"Does the matchlist have the testgame in it?"
+	(loop for m in matchlist do (if (or (and (equal (game-winningid testgame) (match-winnigid r)) 
+											 (equal (game-losingid testgame) (match-losingid r)))
+									    (and (equal (game-winningid testgame) (match-losingid r)) 
+											 (equal (game-losingid testgame) (match-winningid r))))
+									(retrun m)) finally (return NIL)))
+(defun makematches (games)
+	"Takes in a list of game structs and outputs a list of matches"
+	(defparameter *matches* NIL "List of matches")
+	(loop for g in games do (let ((x (gameinmatches g *matches*)))
+				(if x
+					(if (equalp (game-winningid g) (match-winningid x))
+						(setf (match-wins x) (+ 1 (match-wins x)))
+						(setf (match-losses x) (+ 1 (match-losses x))))
+					(setf *matches* (append *matches* (list (make-match :winningid (game-winningid g)
+											                            :losingid (game-losingid g)
+											                            :wins 1
+											                            :losses 0))))))
+	finally (return *matches*)))
+(defun match-id (id testteam)
+	"If testteam has team id id, return T, else return NIL"
+	(if (equal id (team-teamid testteam)) (return T) (return NIL)))
+(defun elo-input (inteam)
+	"returns the old elo of the the team, if it exists
+	if not, returns the default elo value"
+	(if (inteam)
+		(team-elo inteam)
+		*init-elo*))
+(defun update-elo (teams matches)
+	"Uses the matches to update the teams' elos
+	if the team dosn't exist it adds it to teams
+	returns the teamlist"
+	(loop for m in matches do (let* ((t1 (find (match-winningid m) teams #'match-id))
+	                                (t2 (find (match-losingid m) teams #'match-id))
+	                                (data (elo (elo-input t1) (elo-input t2) (match-wins m) (match-losses m))))
+		(if (t1)
+			(setf (team-elo t1) (car data))
+			(setf teams (cons (make-team :teamid (match-winningid m)
+				                         :elo (car data)
+				                         :rank 0
+				                         :timestamp 0) teams)))
+		(if (t2)
+			(setf (team-elo t2) (cadr data))
+			(setf teams (cons (make-team :teamid (match-losingid m)
+				                         :elo (cadr data)
+				                         :rank 0
+				                         :timestamp 0) teams))))
+	finally (return teams)))
+;get the teams, games, and matches
+(let* ((teams (get-teams))
+	  (games (get-games))
+	  (matches (makematches games))
+	  (curtime (game-timestamp (car games))))
+	;update elo and add new teams
+	(setf teams (update-elo teams matches))
+	;sort by elo
+	(sort teams (lambda (x y) (> (team-elo x) (team-elo y))))
+	;update rankings and timestamps
+	(loop for i from 1 to (length teams) do (let ((x (nth (- i 1) teams)))
+												(setf (team-rank x) i)
+												(setf (team-rank x) curtime)))
+	;write new teams to database
+	(db-newteam teams)
+	)
