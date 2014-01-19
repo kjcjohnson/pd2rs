@@ -1,5 +1,20 @@
 <body>	
-  
+  <script>
+    var options =  { 
+    xaxis:{min: 20110000, max:20150000}, 
+    yaxis:{min:500, max:5000},
+    series: {
+    lines: { show: true }, 
+    points: { show: true }
+    }
+    };
+
+    var data = {label: "Elo", data:  [[20130812, 1000], [20130414, 1200], [20130613, 900], [20130224, 1100]]};
+
+    $(document).ready(function() {
+    $.plot($("#plot"), [data]);
+    });
+  </script>
   <div class="wrapper">
     <div class="header container center"><h1><:team-name></h1></div>
   
@@ -20,8 +35,7 @@
 	    </div>
 	    <div class="span9 graph">
 	      <h3>Historical Performance</h3>
-	      <div id="graphdata" visible="false"><:elo-history></div>
-	      <div id="graph"></div>
+	      <div id="plot"></div>
 	    </div>
 	  </div>
 	</div>

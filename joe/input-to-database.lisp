@@ -16,8 +16,8 @@
 	(setf winner (string-trim " " winner))
 	(setf loser (string-trim " " loser))
 	(setf time (string-trim " " time))
-	(if (equalp winner loser)
-		(format t "Error with winner and loser :~a: with timestamp :~a:~%" winner time)
+	(if (equalp winner loser) nil
+		;(format t "Error with winner and loser :~a: with timestamp :~a:~%" winner time)
 		(pd2rs-db:insert-game :winning-team winner :losing-team loser :timestamp time))
 				       ;	(format *out* "~a ~a ~a~%" winner loser time))
 	;(format t "Winner:~a:~%Loser:~a:~%Time:~a:~%" winner loser time)

@@ -93,16 +93,16 @@
 (defun update-game-processed ( game-struct )
 
   (setf (game-struct-processed? (find game-struct ++game-table++)) t))
+;may need to change team-name to team-id (I only use the ids when creating teams -Joe)
+(defun insert-team ( &key team-id (tournament "") (elo 1000) (rank nil) (timestamp 0) )
 
-(defun insert-team ( &key team-name (tournament "") (elo 1000) (rank nil) (timestamp 0) )
-
-  (if (null (find-team-by-name team-name)) (add-team team-name))
+  ;(if (null (find-team-by-name team-name)) (add-team team-name))
   (if (null (find-tournament-by-name tournament)) (add-tournament tournament))
 
   (push
    (make-team-struct :id            ++next-table-id++
-		     :team-id       (find-team-by-name team-name)
-		     :tournament-id (find-tournament-by-name tournament-name)
+		     :team-id       team-id
+		     :tournament-id (find-tournament-by-name tournament)
 		     :elo           elo
 		     :rank          rank
 		     :timestamp     timestamp)

@@ -40,3 +40,9 @@ table strong{
     font-size:28px;
     font-weight:bold;
 }
+
+#plot{
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}

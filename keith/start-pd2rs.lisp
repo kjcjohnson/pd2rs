@@ -14,8 +14,15 @@
 (load (merge-pathnames "keith/handlers.lisp" ++build-dir++))
 (load (merge-pathnames "keith/routing.lisp"  ++build-dir++))
 
+(format t "Beginning input to database...~%")
+
 (load (merge-pathnames "joe/input-to-database.lisp" ++build-dir++))
+
+(format t "Beginning Elo calculations...~%")
+
 (load (merge-pathnames "joe/elo-update.lisp"        ++build-dir++))
+
+(format t "Elo calculations finished. Launching server...~%")
 
 (defvar ++acceptor++ (make-instance 'hunchentoot:easy-acceptor :port 80))
 
