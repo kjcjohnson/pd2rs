@@ -14,6 +14,8 @@
 (load (merge-pathnames "keith/handlers.lisp" ++build-dir++))
 (load (merge-pathnames "keith/routing.lisp"  ++build-dir++))
 
+(load (merge-pathnames "joe/input-to-database.lisp" ++build-dir++))
+(load (merge-pathnames "joe/elo-update.lisp"        ++build-dir++))
 
 (defvar ++acceptor++ (make-instance 'hunchentoot:easy-acceptor :port 80))
 

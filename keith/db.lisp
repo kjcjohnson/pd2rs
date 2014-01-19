@@ -4,6 +4,9 @@
 
 (in-package :pd2rs-db)
 
+(load (merge-pathnames "keith/teamnames.lisp" pd2rs:++build-dir++))
+
+(defparameter ++team-name-hash++ (gethashtable))
 (defparameter ++id-team-table++ nil)
 (defparameter ++next-team-id++ 0)
 (defparameter ++id-tournament-table++ nil)
@@ -30,9 +33,13 @@
   rank
   timestamp)
 
+(defun ctn ( name )
+  (let ((re (gethash name ++team-name-hash++ nil)))
+    (if re re name)))
+
 (defun add-team ( team-name )
   "Adds a team name to the database at next available id."
-  (push (cons ++next-team-id++ team-name)
+  (push (cons ++next-team-id++ (ctn team-name))
 	++id-team-table++)
   (incf ++next-team-id++))
 
@@ -57,13 +64,13 @@
 (defun find-team-by-name ( name )
   "Returns team id from team name."
   (car
-   (find name ++id-team-table++ :test #'(lambda (a b)
+   (find (ctn name) ++id-team-table++ :test #'(lambda (a b)
 					(string= a (cdr b))))))
 
 (defun find-tournament-by-name ( name )
   "Returns tournament id from tournament name."
   (car
-   (find name ++id-tournament-table++ :test #'(lambda (a b)
+   (find (ctn name) ++id-tournament-table++ :test #'(lambda (a b)
 					(string= a (cdr b))))))
 
 

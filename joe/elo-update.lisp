@@ -1,3 +1,5 @@
+(in-package :pd2rs-db)
+
 (defstruct team teamid elo rank timestamp)
 (defstruct game winningid losingid timestamp)
 (defstruct match winningid losingid wins losses)
@@ -11,11 +13,13 @@
 	())
 (defun get-games ()
 	"Returns a list of game sturcts with the same next timestamp"
-	())
+	(let ((games pd2rs-db:++game-table++))
+	  ))
 (defun get-teams ()
 	"Returns a list of the most recent team struts, it also sorts by ranking
 	from best to worst"
-	())
+	(let ((teams pd2rs-db:++team-table++))
+	  ))
 
 (defun expected-win (elo1 elo2)
 	"Returns the expected win share for a player with elo1 if her oppoent's elo is elo2"

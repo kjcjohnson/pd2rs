@@ -16,7 +16,12 @@
 	   #:team-index-handler))
 
 (defpackage #:pd2rs-db
-  (:use #:cl))
+  (:use #:cl)
+  (:export #:++game-table++
+	   #:++team-table++
+	   #:insert-game
+	   #:update-game-processed
+	   #:insert-team))
 
 (defpackage #:pd2rs-views
   (:use #:cl)

@@ -1,6 +1,42 @@
-
 body {
-    
     padding-top: 70px;
+}
 
+.sidebar{
+    background-color: #58D3F7;
+    height: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    float: left;
+}
+
+.sidebar a{
+    color: #610B0B;
+}
+
+.sidebar h3{
+    text-align: center;
+}
+
+.graph{
+    background-color: #31B404;
+    height: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    float: left;
+}
+
+.graph h3{
+    text-align: center;
+}
+
+table{
+    text-align: center;
+    align: center;
+    height: 150px
+}
+
+table strong{
+    font-size:28px;
+    font-weight:bold;
 }

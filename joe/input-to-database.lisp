@@ -1,6 +1,11 @@
-(defparameter *in* (open "c:/Users/joe/Documents/GitHub/pd2rs/perl/clean_data.csv" :if-does-not-exist nil)
+(defparameter *in* 
+  (open (merge-pathnames "perl/clean_data.csv" pd2rs:++build-dir++)
+	:if-does-not-exist nil)
 	"Clean input filestream")
-(defparameter *out* (open "c:/Users/joe/Documents/GitHub/pd2rs/perl/data.out" :direction :output :if-exists :supersede)
+
+
+
+'(defparameter *out* (open "c:/Users/joe/Documents/GitHub/pd2rs/perl/data.out" :direction :output :if-exists :supersede)
 	"Output filestream")
 (defun pinput ()
 	"Gets the next line from the parser, returns as a string.
@@ -13,7 +18,8 @@
 	(setf time (string-trim " " time))
 	(if (equalp winner loser)
 		(format t "Error with winner and loser :~a: with timestamp :~a:~%" winner time)
-		(format *out* "~a ~a ~a~%" winner loser time))
+		(pd2rs-db:insert-game :winning-team winner :losing-team loser :timestamp time))
+				       ;	(format *out* "~a ~a ~a~%" winner loser time))
 	;(format t "Winner:~a:~%Loser:~a:~%Time:~a:~%" winner loser time)
 	)
 
@@ -26,4 +32,4 @@
 				        (subseq x (+ 1 firstcomma) secondcomma)
 				        (subseq x (+ 1 secondcomma) (+ (length x) -1))))))
 (close *in*)
-(close *out*)
+'(close *out*)
