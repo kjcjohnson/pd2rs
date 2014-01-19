@@ -76,6 +76,7 @@
 (defun makematches (games &aux matches)
   "Takes in a list of game structs and outputs a list of matches"
   '(defparameter *matches* NIL "List of matches")
+  (format t "Starting matchmaking... ~%")
   (loop for g in games do (let ((x (gameinmatches g matches)))
 			    (if x
 				(if (equalp (game-winningid g) (match-winningid x))
@@ -136,6 +137,6 @@
 						   (setf (team-rank x) i)
 						   (setf (team-rank x) curtime)))
 					;write new teams to database
-	 (db-newteam teams)))
+	 (db-newteam teams))))
   
 (bordeaux-threads:make-thread #'calc-elos)
