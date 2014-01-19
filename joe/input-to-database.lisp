@@ -26,3 +26,4 @@
 				        (subseq x (+ 1 firstcomma) secondcomma)
 				        (subseq x (+ 1 secondcomma) (+ (length x) -1))))))
 (close *in*)
+(close *out*)

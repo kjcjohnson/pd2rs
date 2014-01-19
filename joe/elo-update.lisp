@@ -28,10 +28,10 @@
 
 (defun gameinmatches (testgame matchlist)
 	"Does the matchlist have the testgame in it?"
-	(loop for m in matchlist do (if (or (and (equal (game-winningid testgame) (match-winnigid r)) 
-											 (equal (game-losingid testgame) (match-losingid r)))
-									    (and (equal (game-winningid testgame) (match-losingid r)) 
-											 (equal (game-losingid testgame) (match-winningid r))))
+	(loop for m in matchlist do (if (or (and (equal (game-winningid testgame) (match-winningid m)) 
+											 (equal (game-losingid testgame) (match-losingid m))
+									    (and (equal (game-winningid testgame) (match-losingid m)) 
+											 (equal (game-losingid testgame) (match-winningid m))))
 									(retrun m)) finally (return NIL)))
 (defun makematches (games)
 	"Takes in a list of game structs and outputs a list of matches"
